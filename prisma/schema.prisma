@@ -30,6 +30,7 @@ model Order {
   userId     Int
 }
 
+
 model OrderDetails {
   orderDetailId Int   @id @default(autoincrement())
   quantity      Int
