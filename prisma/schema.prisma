@@ -37,6 +37,7 @@ model OrderDetails {
   price         Float
 }
 
+
 model Products {
   productId   Int    @id @default(autoincrement())
   name        String
