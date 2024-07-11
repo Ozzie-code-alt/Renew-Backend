@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "packageManager": "yarn@4.2.2",
+  "dependencies": {
+    "@prisma/client": "^5.16.2",
+    "express": "^4.19.2",
+    "prisma": "^5.16.2"
+  }
+}
