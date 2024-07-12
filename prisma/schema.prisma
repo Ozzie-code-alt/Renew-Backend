@@ -23,29 +23,28 @@ model User {
 }
 
 model Order {
-  orderId    Int      @id @default(autoincrement())
-  totalPrice Float
-  orderDate  DateTime
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
+  id                 Int      @id @default(autoincrement())
+  Price              Float
+  Date               DateTime
+  user               User     @relation(fields: [userId], references: [id])
+  userId             Int
+  productID          Int
+  productDescription Products @relation(fields: [productID], references: [id])
 }
-
-
-model OrderDetails {
-  orderDetailId Int   @id @default(autoincrement())
-  quantity      Int
-  price         Float
-}
-
 
 model Products {
-  productId   Int    @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
+  id           Int              @id @default(autoincrement())
+  name         String
+  description  String
+  priceInCents Int
+  category     ItemCategories[]
+  orders       Order[]
 }
 
-model Categories {
-  categoryId   Int    @id @default(autoincrement())
-  categoryName String
+enum ItemCategories {
+  Tech
+  Lifestyle
+  Healcare
+  PersonalCare
+  Food
 }
