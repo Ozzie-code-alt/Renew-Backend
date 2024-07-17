@@ -14,12 +14,34 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  address  String
-  email    String
-  password String
-  orders   Order[]
+  id             Int       @id @default(autoincrement())
+  name           String
+  address        String
+  email          String
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  orders         Order[]
+  Account        Account[]
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade) // this creates a relation. Rewatch antpnio on his part on youtube for more unserstanding  @1:40:00 
+
+  @@unique([provider, providerAccountId])
 }
 
 model Order {
