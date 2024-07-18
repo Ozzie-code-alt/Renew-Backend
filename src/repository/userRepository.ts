@@ -4,6 +4,12 @@ const prisma = new PrismaClient();
 
 export const userRepository = {
   createUser: async (data: Prisma.UserCreateInput): Promise<User> => {
-    return await prisma.user.create({ data });
+    const user = prisma.user.create({ data });
+    if (!user) {
+      console.log("user Repository not Working");
+    } else {
+      console.log("Signed in");
+    }
+    return user;
   },
 };

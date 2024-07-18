@@ -18,8 +18,8 @@ export const userService = {
     try {
 
       // Hash the password
-      const password = await bcrypt.hash(data.password, 10);
-      data.password = password;
+      const password = await bcrypt.hash(data.hashedPassword as string , 10);
+      data.hashedPassword = password;
 
       // Create the user
       const createdUser = await userRepository.createUser(data);
