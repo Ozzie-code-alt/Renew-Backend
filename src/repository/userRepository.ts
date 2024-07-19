@@ -1,7 +1,7 @@
 import { Prisma, PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
+//DB Queries Here
 export const userRepository = {
   createUser: async (data: Prisma.UserCreateInput): Promise<User> => {
     const user = prisma.user.create({ data });
@@ -11,5 +11,19 @@ export const userRepository = {
       console.log("Signed in");
     }
     return user;
+  },
+  fetchByEmail: async (email: string) => {
+    const user = prisma.user.findFirst({ where: { email } });
+    try {
+      if (!user) {
+        console.log("User Not Found by Email");
+      }
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  fetchAllUser: async (): Promise<User[]> => {
+    return await prisma.user.findMany({});
   },
 };
