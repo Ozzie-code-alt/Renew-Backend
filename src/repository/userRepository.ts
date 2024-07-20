@@ -26,4 +26,15 @@ export const userRepository = {
   fetchAllUser: async (): Promise<User[]> => {
     return await prisma.user.findMany({});
   },
+  fetchUserById: async (id: number) => {
+    const userId = await prisma.user.findFirst({ where: { id } });
+    try {
+      if (!userId) {
+        console.log("User ID is not found in Repository");
+      }
+      return userId;
+    } catch (error) {
+      console.log("Error In fetchin ID In Repository", error);
+    }
+  },
 };

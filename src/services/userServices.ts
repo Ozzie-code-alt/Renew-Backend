@@ -83,4 +83,16 @@ export const userService = {
       return [];
     }
   },
+
+  fetchUserByid: async (id: number) => {
+    const getUserById = await userRepository.fetchUserById(id);
+    try {
+      if (!getUserById) {
+        console.log("Error Fetching User in Controller");
+      }
+      return getUserById;
+    } catch (error) {
+      console.log("Error in fetching in Controller", error);
+    }
+  },
 };

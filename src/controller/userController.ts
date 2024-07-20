@@ -10,4 +10,7 @@ export const userController = {
   getAllUser: async () => {
     return await userService.fetchAllUser();
   },
+  getUserById: async (request: Request) => {
+    return await userService.fetchUserByid(Number(request.params.id));
+  },
 };
