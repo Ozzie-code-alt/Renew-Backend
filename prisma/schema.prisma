@@ -21,7 +21,7 @@ model User {
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  orders         Order[]
+  cart           Cart[]
   Account        Account[]
 }
 
@@ -45,32 +45,23 @@ model Account {
 }
 
 model Cart {
-  id              Int    @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
+  price           Float
+  date            DateTime
+  user            User       @relation(fields: [userId], references: [id])
+  userId          Int
   productQuantity Int
-  order           Order?
-}
-
-model Order {
-  id                 Int      @id @default(autoincrement())
-  Price              Float
-  Date               DateTime
-  user               User     @relation(fields: [userId], references: [id])
-  userId             Int
-  productID          Int
-  cardID             Int
-  productDescription Products @relation(fields: [productID], references: [id])
-  card               Cart     @relation(fields: [cardID], references: [id])
-
-  @@unique([cardID])
+  Products        Products[]
 }
 
 model Products {
   id           Int              @id @default(autoincrement())
   name         String
   description  String
+  cartId       Int?
   priceInCents Int
   category     ItemCategories[]
-  orders       Order[]
+  cart         Cart?            @relation(fields: [cartId], references: [id])
 }
 
 enum ItemCategories {
