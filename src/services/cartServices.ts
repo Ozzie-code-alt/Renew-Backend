@@ -15,4 +15,25 @@ export const cartServices = {
     }
     return cartDataId;
   },
-};
+  addToCart: async ({
+    userId,
+    productQuantity,
+    price,
+    date,
+  }: {
+    userId: number;
+    productQuantity: number;
+    price: number;
+    date: Date;
+  }) => {
+    // First i Check if Theres an Existing Cart
+      const addToCart = await cartRepository.addToCart(
+        userId,
+        productQuantity,
+        price,
+        date
+      );
+      return addToCart;
+    }
+  }
+

@@ -7,4 +7,8 @@ export const cartController = {
   getCartId: async (request: Request) => {
     return await cartServices.fetchCartDataById(Number(request.params.id));
   },
+
+  addToCart: async (request: Request) => {
+    return await cartServices.addToCart(request.body);
+  },
 };

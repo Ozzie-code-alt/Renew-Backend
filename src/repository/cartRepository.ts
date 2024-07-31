@@ -1,5 +1,4 @@
 import { Prisma, PrismaClient, Cart } from "@prisma/client";
-import { number } from "zod";
 
 const prisma = new PrismaClient();
 
@@ -20,13 +19,38 @@ export const cartRepository = {
 
       if (!cartDataId) {
         console.error("Cart ID Not Found");
-        return null; // Or you can throw an error if that fits your error handling strategy
+        return null;
       }
 
       return cartDataId;
     } catch (error) {
       console.error("Error fetching cart by ID:", error);
-      throw error; // Re-throw the error to handle it further up the call stack if needed
+      throw error;
     }
+  },
+  addToCart: async (
+    userId: number,
+    productQuantity: number,
+    price: number,
+    date: Date
+  ): Promise<Cart> => {
+    const cartData = await prisma.cart.create({
+      data: { userId, productQuantity, price, date },
+    });
+    if (!cartData) {
+      console.log("CartData not found");
+    }
+    return cartData;
+  },
+
+  existingCart: async (
+    userId: number,
+    productQuantity: number,
+    price: number
+  ): Promise<Cart[]> => {
+    const existingCartItems = await prisma.cart.findMany({
+      where: { userId: userId, productQuantity: productQuantity, price: price },
+    });
+    return existingCartItems;
   },
 };
