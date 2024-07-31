@@ -8,4 +8,11 @@ export const cartServices = {
     }
     return servicesCartData;
   },
+  fetchCartDataById: async (id: number) => {
+    const cartDataId = await cartRepository.fetchCartById(id);
+    if (!cartDataId) {
+      console.error("Error Fetching Cart Data ID Services");
+    }
+    return cartDataId;
+  },
 };
