@@ -1,7 +1,7 @@
 import express from "express";
 import { cartController } from "../controller/cartController";
 import toHandler from "../../utils/controllerHandler";
-import { handler } from "tailwindcss-animate";
+
 
 const cartRouter = express.Router();
 

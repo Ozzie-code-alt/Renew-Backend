@@ -3,7 +3,9 @@ import dotenvv from "dotenv";
 import userRouter from "./route/userRoute";
 import cors from "cors";
 import cartRouter from "./route/cartRoute";
-dotenvv.config();
+import productRouter from "./route/productRoute";
+dotenvv.config
+();
 
 const port = process.env.PORT || 4000;
 
@@ -23,6 +25,7 @@ app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/product", productRouter)
 app.listen(port, () => {
   console.log(`Server started in port: ${port}`);
 });
