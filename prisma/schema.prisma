@@ -61,7 +61,7 @@ model Products {
   description  String
   cartId       Int?
   priceInCents Int
-  category     ItemCategories[]
+  category     ItemCategories[] 
   cart         Cart?            @relation(fields: [cartId], references: [id])
 }
 
