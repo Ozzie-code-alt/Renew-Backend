@@ -1,4 +1,4 @@
-import { Prisma, Cart } from "@prisma/client";
+import { Prisma, Cart, Products } from "@prisma/client";
 import { cartRepository } from "../repository/cartRepository";
 export const cartServices = {
   fetchAllCartData: async (): Promise<Cart[]> => {
@@ -17,23 +17,14 @@ export const cartServices = {
   },
   addToCart: async ({
     userId,
-    productQuantity,
-    price,
-    date,
+    totalPrice,
+    productId,
   }: {
     userId: number;
-    productQuantity: number;
-    price: number;
-    date: Date;
+    totalPrice: number;
+    productId: number;
   }) => {
-    // First i Check if Theres an Existing Cart
-      const addToCart = await cartRepository.addToCart(
-        userId,
-        productQuantity,
-        price,
-        date
-      );
-      return addToCart;
-    }
-  }
-
+    const cartData = await cartRepository.addToCart(userId, totalPrice, productId);
+    return cartData;
+  },
+};

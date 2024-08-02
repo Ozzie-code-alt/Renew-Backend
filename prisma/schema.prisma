@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL") // uses connection pooling
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // uses connection pooling
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
@@ -46,23 +46,23 @@ model Account {
 }
 
 model Cart {
-  id              Int        @id @default(autoincrement())
-  price           Float
-  date            DateTime?
-  user            User       @relation(fields: [userId], references: [id])
-  userId          Int
-  productQuantity Int
-  Products        Products[]
+  id         Int        @id @default(autoincrement())
+  totalPrice Float
+  date       DateTime?
+  user       User       @relation(fields: [userId], references: [id])
+  userId     Int
+  products   Products[]
 }
 
 model Products {
-  id           Int              @id @default(autoincrement())
-  name         String
-  description  String
-  cartId       Int?
-  priceInCents Int
-  category     ItemCategories[] 
-  cart         Cart?            @relation(fields: [cartId], references: [id])
+  id              Int              @id @default(autoincrement())
+  name            String
+  description     String
+  cartId          Int?
+  productQuantity Int
+  priceInCents    Int
+  category        ItemCategories[]
+  cart            Cart?            @relation(fields: [cartId], references: [id])
 }
 
 enum ItemCategories {
