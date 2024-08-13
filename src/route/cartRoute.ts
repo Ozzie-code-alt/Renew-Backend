@@ -5,7 +5,7 @@ import toHandler from "../../utils/controllerHandler";
 
 const cartRouter = express.Router();
 
-cartRouter.get("/getCart", toHandler(cartController.getAllCart));
+cartRouter.get("/", toHandler(cartController.getAllCart));
 cartRouter.get("/:id", toHandler(cartController.getCartId));
-cartRouter.post("/Addcart", toHandler(cartController.addToCart));
+cartRouter.post("/", toHandler(cartController.addToCart));
 export default cartRouter;
