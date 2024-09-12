@@ -68,7 +68,7 @@ model Products {
 enum ItemCategories {
   Tech
   Lifestyle
-  Healcare
+  Healthcare
   PersonalCare
   Food
 }
